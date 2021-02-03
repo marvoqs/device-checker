@@ -1,7 +1,14 @@
 import React from 'react';
 
-function App() {
-  return <div>Hello World</div>;
-}
+// Components
+import TopBar from './components/TopBar';
+
+const App: React.FC = () => {
+  return (
+    <>
+      <TopBar />
+    </>
+  );
+};
 
 export default App;
