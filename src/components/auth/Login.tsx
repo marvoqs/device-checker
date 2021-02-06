@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { login } from '../actions/auth';
+import { login } from '../../actions/auth';
 
 // Material-UI
 import { Button, Container, Input, Paper, Typography } from '@material-ui/core';
