@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { login } from '../actions/auth';
 
 // Material-UI
 import { Button, Container, Input, Paper, Typography } from '@material-ui/core';
@@ -22,6 +26,8 @@ interface FormData {
 
 const Login: React.FC = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector((state: StateType) => state.auth);
   const [formData, setFormData] = useState<FormData>({
     login: '',
     password: '',
@@ -33,7 +39,13 @@ const Login: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+    dispatch(login(formData.login, formData.password));
   };
+
+  // Redirect if logged in
+  if (isAuthenticated) {
+    return <Redirect to='/' />;
+  }
 
   return (
     <Container maxWidth='sm'>
@@ -63,7 +75,7 @@ const Login: React.FC = () => {
             type='password'
             value={formData.password}
           />
-          <Button className={classes.formItem} color='primary' fullWidth size='small' variant='contained'>
+          <Button className={classes.formItem} color='primary' fullWidth size='small' type='submit' variant='contained'>
             Přihlásit se
           </Button>
         </form>
