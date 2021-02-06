@@ -4,8 +4,6 @@ import { setAlert } from './alert';
 
 import { AUTH_ERROR, AUTH_SUCCESS, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT } from './types';
 
-const ROOT_URL = 'https://js-test-api.etnetera.cz/api/v1';
-
 // Authenticate User
 export const authenticate = () => (dispatch: Dispatch) => {
   if (localStorage.token && localStorage.user) {
@@ -26,7 +24,7 @@ export const login = (login: string, password: string) => async (dispatch: Dispa
   const body = JSON.stringify({ login, password });
 
   try {
-    const res = await axios.post(`${ROOT_URL}/login`, body, config);
+    const res = await axios.post(`${process.env.REACT_APP_API_ROOT_URL}/login`, body, config);
 
     const payload = {
       token: res.data.token,

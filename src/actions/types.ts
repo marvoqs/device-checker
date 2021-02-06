@@ -9,3 +9,7 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT = 'LOGOUT';
 export const USER_LOADED = 'USER_LOADED';
+
+// Device types
+export const DEVICE_ERROR = 'DEVICE_ERROR';
+export const GET_DEVICES = 'GET_DEVICES';

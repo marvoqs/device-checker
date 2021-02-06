@@ -14,6 +14,7 @@ interface AlertActionType {
 interface StateType {
   alert: AlertStateType;
   auth: AuthStateType;
+  device: DeviceStateType;
 }
 
 interface AuthStateType {
@@ -30,7 +31,37 @@ interface AuthActionType {
 
 interface UserType {
   id: number;
-  type: string;
+  type: 'user' | 'admin';
   login: string;
   name: string;
+}
+
+interface ErrorType {
+  msg: string;
+  status: number;
+}
+
+interface DeviceType {
+  id: string;
+  code: string;
+  os: 'ANDROID' | 'IOS' | 'WINDOWS';
+  vendor: string;
+  model: string;
+  osVersion: string;
+  image: string;
+  borrowed: {
+    user: UserType;
+    date: number;
+  };
+}
+
+interface DeviceStateType {
+  devices: DeviceType[];
+  loading: boolean;
+  error: ErrorType | null;
+}
+
+interface DeviceActionType {
+  type: string;
+  payload?: any;
 }
