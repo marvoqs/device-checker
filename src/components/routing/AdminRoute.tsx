@@ -2,10 +2,12 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-const PrivateRoute: React.FC<any> = ({ component: Component, ...rest }) => {
-  const user = useSelector((state: StateType) => state.auth.user);
+const AdminRoute: React.FC<any> = ({ component: Component, ...rest }) => {
+  const { loading, user } = useSelector((state: StateType) => state.auth);
 
-  return <Route {...rest} render={(props) => (user?.type === 'admin' ? <Component {...props} /> : <Redirect to='/' />)} />;
+  console.log(user);
+
+  return <Route {...rest} render={(props) => (user?.type !== 'admin' && !loading ? <Redirect to='/' /> : <Component {...props} />)} />;
 };
 
-export default PrivateRoute;
+export default AdminRoute;

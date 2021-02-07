@@ -17,8 +17,6 @@ const DevicesList: React.FC = () => {
     dispatch(getDevices());
   }, [dispatch]);
 
-  console.log(devices);
-
   return (
     <Container>
       {loading ? (

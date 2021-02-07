@@ -1,11 +1,17 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-// Components
+// Routing Components
+import AdminRoute from './components/routing/AdminRoute';
+import PrivateRoute from './components/routing/PrivateRoute';
+
+// Layout Components
+import TopBar from './components/layout/TopBar';
+
+// Page Components
+import AddDevice from './components/devices/AddDevice';
 import DevicesList from './components/devices/DevicesList';
 import Login from './components/auth/Login';
-import PrivateRoute from './components/routing/PrivateRoute';
-import TopBar from './components/layout/TopBar';
 
 // Material-UI
 import { Container } from '@material-ui/core';
@@ -45,6 +51,7 @@ const App: React.FC = () => {
         <Container className={classes.content}>
           <Switch>
             <Route exact path='/login' component={Login} />
+            <AdminRoute exact path='/add' component={AddDevice} />
             <PrivateRoute exact path='/' component={DevicesList} />
           </Switch>
         </Container>

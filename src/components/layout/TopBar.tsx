@@ -25,18 +25,27 @@ const useStyles = makeStyles((theme: Theme) =>
 const TopBar: React.FC = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { isAuthenticated } = useSelector((state: StateType) => state.auth);
+  const { isAuthenticated, user } = useSelector((state: StateType) => state.auth);
   return (
     <div className={classes.root}>
       <AppBar position='static'>
         <Toolbar>
           <Typography className={classes.title} variant='h6'>
-            deviceChecker
+            <Link to='/'>deviceChecker</Link>
           </Typography>
           {isAuthenticated ? (
-            <Button onClick={() => dispatch(logout() as any)} size='small' variant='contained'>
-              Odhlásit
-            </Button>
+            <>
+              <Button onClick={() => dispatch(logout() as any)} size='small' variant='contained'>
+                Odhlásit
+              </Button>
+              {user?.type === 'admin' && (
+                <Link className={classes.linkButton} to='/add'>
+                  <Button size='small' variant='contained'>
+                    Přidat zařízení
+                  </Button>
+                </Link>
+              )}
+            </>
           ) : (
             <Link className={classes.linkButton} to='/login'>
               <Button size='small' variant='contained'>

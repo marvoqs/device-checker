@@ -11,6 +11,7 @@ export const LOGOUT = 'LOGOUT';
 export const USER_LOADED = 'USER_LOADED';
 
 // Device types
+export const ADD_DEVICE = 'ADD_DEVICE';
 export const DEVICE_ERROR = 'DEVICE_ERROR';
 export const GET_DEVICES = 'GET_DEVICES';
 export const UPDATE_DEVICE = 'UPDATE_DEVICE';

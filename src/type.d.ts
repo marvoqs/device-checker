@@ -44,7 +44,7 @@ interface ErrorType {
 interface DeviceType {
   id: string;
   code: string;
-  os: 'ANDROID' | 'IOS' | 'WINDOWS';
+  os: OsType;
   vendor: string;
   model: string;
   osVersion: string;
@@ -64,4 +64,15 @@ interface DeviceStateType {
 interface DeviceActionType {
   type: string;
   payload?: any;
+}
+
+type OsType = 'ANDROID' | 'IOS' | 'WINDOWS';
+
+interface DeviceFormData {
+  code: string;
+  image: string;
+  model: string;
+  os: OsType | '';
+  osVersion: string;
+  vendor: string;
 }

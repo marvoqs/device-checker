@@ -1,4 +1,4 @@
-import { DEVICE_ERROR, GET_DEVICES, UPDATE_DEVICE } from '../actions/types';
+import { ADD_DEVICE, DEVICE_ERROR, GET_DEVICES, UPDATE_DEVICE } from '../actions/types';
 
 const initialState = {
   devices: [],
@@ -19,6 +19,12 @@ const deviceReducer = (state: DeviceStateType = initialState, action: DeviceActi
       return {
         ...state,
         error: payload,
+        loading: false,
+      };
+    case ADD_DEVICE:
+      return {
+        ...state,
+        devices: [...state.devices, payload],
         loading: false,
       };
     case UPDATE_DEVICE:
