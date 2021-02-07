@@ -49,7 +49,7 @@ interface DeviceType {
   model: string;
   osVersion: string;
   image: string;
-  borrowed: {
+  borrowed?: {
     user: UserType;
     date: number;
   };

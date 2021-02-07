@@ -1,4 +1,4 @@
-import { DEVICE_ERROR, GET_DEVICES } from '../actions/types';
+import { DEVICE_ERROR, GET_DEVICES, UPDATE_DEVICE } from '../actions/types';
 
 const initialState = {
   devices: [],
@@ -6,7 +6,7 @@ const initialState = {
   error: null,
 };
 
-const deviceReducer = (state: DeviceStateType = initialState, action: DeviceActionType) => {
+const deviceReducer = (state: DeviceStateType = initialState, action: DeviceActionType): DeviceStateType => {
   const { type, payload } = action;
   switch (type) {
     case GET_DEVICES:
@@ -18,8 +18,13 @@ const deviceReducer = (state: DeviceStateType = initialState, action: DeviceActi
     case DEVICE_ERROR:
       return {
         ...state,
-        profile: null,
         error: payload,
+        loading: false,
+      };
+    case UPDATE_DEVICE:
+      return {
+        ...state,
+        devices: state.devices.map((device) => (device.id === payload.id ? payload : device)),
         loading: false,
       };
     default:

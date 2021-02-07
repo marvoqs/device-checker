@@ -13,3 +13,4 @@ export const USER_LOADED = 'USER_LOADED';
 // Device types
 export const DEVICE_ERROR = 'DEVICE_ERROR';
 export const GET_DEVICES = 'GET_DEVICES';
+export const UPDATE_DEVICE = 'UPDATE_DEVICE';

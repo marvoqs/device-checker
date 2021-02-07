@@ -17,12 +17,14 @@ const DevicesList: React.FC = () => {
     dispatch(getDevices());
   }, [dispatch]);
 
+  console.log(devices);
+
   return (
     <Container>
       {loading ? (
         <Spinner />
       ) : (
-        <Grid container spacing={3}>
+        <Grid container spacing={2}>
           {devices.map((device) => (
             <DeviceItem key={device.id} device={device} />
           ))}
