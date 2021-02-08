@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDevices } from '../../actions/device';
 
@@ -9,7 +9,7 @@ import Spinner from '../layout/Spinner';
 // Material-UI
 import { Container, Grid } from '@material-ui/core';
 
-const DevicesList: React.FC = () => {
+const DevicesList: FC = () => {
   const dispatch = useDispatch();
   const { devices, loading } = useSelector((state: StateType) => state.device);
 

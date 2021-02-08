@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -6,9 +6,9 @@ import { logout } from '../../actions/auth';
 
 // Material-UI
 import { AppBar, Button, Toolbar, Typography } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     linkButton: {
       textDecoration: 'none',
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const TopBar: React.FC = () => {
+const TopBar: FC = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((state: StateType) => state.auth);

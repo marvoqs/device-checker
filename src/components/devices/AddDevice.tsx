@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { addDevice } from '../../actions/device';
@@ -18,9 +19,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const AddDevice: React.FC = () => {
+const AddDevice: FC = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
   const [formData, setFormData] = useState<DeviceFormData>({
     code: '',
     image: '',
@@ -30,17 +32,14 @@ const AddDevice: React.FC = () => {
     vendor: '',
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setFormData((formData: DeviceFormData) => ({ ...formData, [e.target.name]: e.target.value }));
-  };
-
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-    setFormData((formData: DeviceFormData) => ({ ...formData, [e.target.name]: e.target.value }));
+  const handleChange = (e: React.ChangeEvent<{ value: unknown; name?: string }>): void => {
+    setFormData((formData: DeviceFormData) => ({ ...formData, [e.target.name as keyof typeof formData]: e.target.value }));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     dispatch(addDevice(formData));
+    history.push('/');
   };
 
   return (
@@ -50,19 +49,19 @@ const AddDevice: React.FC = () => {
         <form onSubmit={handleSubmit}>
           <FormControl fullWidth>
             <InputLabel id='code'>Kódové označení (identifikátor)</InputLabel>
-            <Input className={classes.formItem} fullWidth id='code' name='code' onChange={handleInputChange} required type='text' value={formData.code} />
+            <Input className={classes.formItem} fullWidth id='code' name='code' onChange={handleChange} required type='text' value={formData.code} />
           </FormControl>
           <FormControl fullWidth>
             <InputLabel id='vendor'>Výrobce</InputLabel>
-            <Input className={classes.formItem} fullWidth id='vendor' name='vendor' onChange={handleInputChange} required type='text' value={formData.vendor} />
+            <Input className={classes.formItem} fullWidth id='vendor' name='vendor' onChange={handleChange} required type='text' value={formData.vendor} />
           </FormControl>
           <FormControl fullWidth>
             <InputLabel id='model'>Model</InputLabel>
-            <Input className={classes.formItem} fullWidth id='model' name='model' onChange={handleInputChange} required type='text' value={formData.model} />
+            <Input className={classes.formItem} fullWidth id='model' name='model' onChange={handleChange} required type='text' value={formData.model} />
           </FormControl>
           <FormControl fullWidth>
             <InputLabel id='os'>Operační systém</InputLabel>
-            <Select className={classes.formItem} fullWidth id='os' name='os' onChange={handleSelectChange as any} required value={formData.os}>
+            <Select className={classes.formItem} fullWidth id='os' name='os' onChange={handleChange} required value={formData.os}>
               <MenuItem value='ANDROID'>ANDROID</MenuItem>
               <MenuItem value='IOS'>IOS</MenuItem>
               <MenuItem value='WINDOWS'>WINDOWS</MenuItem>
@@ -75,7 +74,7 @@ const AddDevice: React.FC = () => {
               fullWidth
               id='osVersion'
               name='osVersion'
-              onChange={handleInputChange}
+              onChange={handleChange}
               placeholder='Verze operačního systému'
               required
               type='text'
@@ -84,7 +83,7 @@ const AddDevice: React.FC = () => {
           </FormControl>
           <FormControl fullWidth>
             <InputLabel id='image'>Obrázek (URL)</InputLabel>
-            <Input className={classes.formItem} fullWidth id='image' name='image' onChange={handleInputChange} type='text' value={formData.image} />
+            <Input className={classes.formItem} fullWidth id='image' name='image' onChange={handleChange} type='text' value={formData.image} />
           </FormControl>
           <Button className={classes.formItem} color='primary' fullWidth size='small' type='submit' variant='contained'>
             Přidat zařízení

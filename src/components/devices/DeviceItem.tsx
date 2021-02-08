@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { borrowDevice, returnDevice } from '../../actions/device';
@@ -8,9 +8,9 @@ import noimage from '../../img/noimage.jpg';
 
 // Material-UI
 import { Box, Button, Card, CardContent, Grid, Typography } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     box: {
       textAlign: 'center',
@@ -22,7 +22,7 @@ interface IProps {
   device: DeviceType;
 }
 
-const DeviceItem: React.FC<IProps> = ({ device }) => {
+const DeviceItem: FC<IProps> = ({ device }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { user } = useSelector((state: StateType) => state.auth);

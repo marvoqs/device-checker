@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -24,7 +24,7 @@ interface FormData {
   password: string;
 }
 
-const Login: React.FC = () => {
+const Login: FC = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state: StateType) => state.auth);
