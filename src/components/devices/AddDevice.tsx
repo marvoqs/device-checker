@@ -76,7 +76,6 @@ const AddDevice: FC = () => {
               name='osVersion'
               onChange={handleChange}
               placeholder='Verze operačního systému'
-              required
               type='text'
               value={formData.osVersion}
             />

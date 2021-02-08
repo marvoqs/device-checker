@@ -10,6 +10,7 @@ export const authenticate = () => (dispatch: Dispatch) => {
     dispatch({ type: AUTH_SUCCESS });
   } else {
     dispatch({ type: AUTH_ERROR });
+    dispatch(setAlert('Autorizace selhala. Zadej prosím přihlašovací údaje.', 'error') as any);
   }
 };
 
@@ -41,9 +42,9 @@ export const login = (login: string, password: string) => async (dispatch: Dispa
       payload,
     });
   } catch (err) {
-    const errors = err.response.data.errors;
-    if (errors) {
-      errors.forEach((error: any) => dispatch(setAlert(error.msg, 'danger') as any));
+    const error = err.response.data.error;
+    if (error) {
+      dispatch(setAlert(error, 'error') as any);
     }
     dispatch({
       type: LOGIN_FAIL,
@@ -54,4 +55,5 @@ export const login = (login: string, password: string) => async (dispatch: Dispa
 // Logout User
 export const logout = () => (dispatch: Dispatch) => {
   dispatch({ type: LOGOUT });
+  dispatch(setAlert('Byl/a jsi úspěšně odhlášen/a.', 'success') as any);
 };

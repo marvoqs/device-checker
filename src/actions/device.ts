@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
+import { setAlert } from './alert';
 
 import { ADD_DEVICE, DEVICE_ERROR, GET_DEVICES, UPDATE_DEVICE } from './types';
 
@@ -35,11 +36,13 @@ export const addDevice = (formData: DeviceFormData) => async (dispatch: Dispatch
       type: ADD_DEVICE,
       payload: res.data,
     });
+    dispatch(setAlert(`Zařízení ${res.data.model} bylo přidáno.`, 'success') as any);
   } catch (err) {
     dispatch({
       type: DEVICE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
+    dispatch(setAlert('Zařízení se nepodařilo přidat. Zkus to prosím později.', 'error') as any);
   }
 };
 
@@ -51,11 +54,13 @@ export const borrowDevice = (id: string) => async (dispatch: Dispatch) => {
       type: UPDATE_DEVICE,
       payload: res.data,
     });
+    dispatch(setAlert(`Zařízení ${res.data.model} bylo označeno jako zapůjčené.`, 'success') as any);
   } catch (err) {
     dispatch({
       type: DEVICE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
+    dispatch(setAlert('Zařízení se nepodařilo zapůjčit. Zkus to prosím později.', 'error') as any);
   }
 };
 
@@ -67,10 +72,12 @@ export const returnDevice = (id: string) => async (dispatch: Dispatch) => {
       type: UPDATE_DEVICE,
       payload: res.data,
     });
+    dispatch(setAlert(`Zařízení ${res.data.model} bylo označeno jako vrácené.`, 'success') as any);
   } catch (err) {
     dispatch({
       type: DEVICE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
+    dispatch(setAlert('Zařízení se nepodařilo vrátit. Zkus to prosím později.', 'error') as any);
   }
 };

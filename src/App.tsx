@@ -6,6 +6,7 @@ import AdminRoute from './components/routing/AdminRoute';
 import PrivateRoute from './components/routing/PrivateRoute';
 
 // Layout Components
+import AlertPanel from './components/layout/AlertPanel';
 import TopBar from './components/layout/TopBar';
 
 // Page Components
@@ -48,6 +49,7 @@ const App: React.FC = () => {
     <Provider store={store}>
       <Router>
         <TopBar />
+        <AlertPanel />
         <Container className={classes.content}>
           <Switch>
             <Route exact path='/login' component={Login} />

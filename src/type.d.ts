@@ -1,7 +1,7 @@
 interface AlertType {
   id: number;
   msg: string;
-  type: string;
+  type: 'error' | 'success' | 'info' | 'warning' | undefined;
 }
 
 type AlertStateType = AlertType[];
