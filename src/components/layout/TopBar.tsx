@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+// Actions
 import { logout } from '../../actions/auth';
 
 // Material-UI

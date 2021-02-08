@@ -1,5 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+// Actions
 import { getDevices } from '../../actions/device';
 
 // Components
