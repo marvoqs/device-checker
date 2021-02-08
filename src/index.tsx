@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+// Material-UI
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import theme from './theme';

@@ -1,14 +1,15 @@
 interface AlertType {
-  id: number;
   msg: string;
-  type: 'error' | 'success' | 'info' | 'warning' | undefined;
+  type: AlertTypeType;
 }
 
-type AlertStateType = AlertType[];
+type AlertTypeType = 'error' | 'success' | 'info' | 'warning' | undefined;
+
+type AlertStateType = AlertType | null;
 
 interface AlertActionType {
   type: string;
-  payload: AlertType | number;
+  payload: AlertType;
 }
 
 interface StateType {
