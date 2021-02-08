@@ -35,6 +35,7 @@ const TopBar: FC = () => {
           </Typography>
           {isAuthenticated ? (
             <>
+              <Typography>{user?.login}</Typography>
               <Button onClick={() => dispatch(logout() as any)} size='small' variant='contained'>
                 Odhlásit
               </Button>

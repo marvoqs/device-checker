@@ -15,6 +15,7 @@ interface StateType {
   alert: AlertStateType;
   auth: AuthStateType;
   device: DeviceStateType;
+  filter: FilterStateType;
 }
 
 interface AuthStateType {
@@ -75,4 +76,18 @@ interface DeviceFormData {
   os: OsType | '';
   osVersion: string;
   vendor: string;
+}
+
+interface FilterType {
+  available: boolean;
+  model: string;
+  os: '' | OsType;
+  vendor: string;
+}
+
+type FilterStateType = FilterType;
+
+interface FilterActionType {
+  type: string;
+  payload: FilterType;
 }
