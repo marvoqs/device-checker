@@ -8,13 +8,21 @@ import { borrowDevice, returnDevice } from '../../actions/device';
 import noimage from '../../img/noimage.jpg';
 
 // Material-UI
-import { Box, Button, Card, CardContent, Grid, Typography } from '@material-ui/core';
+import { Box, Button, Card, CardActionArea, CardContent, Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() =>
   createStyles({
     box: {
       textAlign: 'center',
+    },
+    card: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '100%',
+    },
+    grid: {
+      display: 'flex',
     },
   })
 );
@@ -28,17 +36,19 @@ const DeviceItem: FC<IProps> = ({ device }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state: StateType) => state.auth);
   return (
-    <Grid item key={device.id} lg={2} md={3} sm={4} xs={6}>
-      <Card>
+    <Grid className={classes.grid} item key={device.id} lg={2} md={3} sm={4} xs={6}>
+      <Card className={classes.card}>
         <CardContent>
           <Box className={classes.box}>
-            <img alt={device.model} src={device.image ? device.image : noimage} style={{ height: '6rem', margin: '0 auto' }} title={device.model} />
+            <img alt={device.model} src={device.image ? device.image : noimage} style={{ margin: '0 auto', height: '6rem' }} title={device.model} />
           </Box>
           <Typography variant='h6'>{device.model}</Typography>
           <Typography variant='subtitle2'>{device.vendor}</Typography>
           <Typography variant='subtitle2'>
             {device.os} / {device.osVersion}
           </Typography>
+        </CardContent>
+        <CardActionArea>
           {device.borrowed && device.borrowed.user.id === user?.id ? (
             <Button color='primary' fullWidth size='small' onClick={() => dispatch(returnDevice(device.id))} variant='contained'>
               Vrátit
@@ -54,7 +64,7 @@ const DeviceItem: FC<IProps> = ({ device }) => {
               Půjčit
             </Button>
           )}
-        </CardContent>
+        </CardActionArea>
       </Card>
     </Grid>
   );

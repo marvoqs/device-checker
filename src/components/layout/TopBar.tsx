@@ -11,6 +11,10 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() =>
   createStyles({
+    button: {
+      borderRadius: 0,
+      marginLeft: '1rem',
+    },
     linkButton: {
       textDecoration: 'none',
     },
@@ -37,12 +41,12 @@ const TopBar: FC = () => {
           {isAuthenticated ? (
             <>
               <Typography>{user?.login}</Typography>
-              <Button onClick={() => dispatch(logout() as any)} size='small' variant='contained'>
+              <Button className={classes.button} onClick={() => dispatch(logout() as any)} size='small' variant='contained'>
                 Odhlásit
               </Button>
               {user?.type === 'admin' && (
                 <Link className={classes.linkButton} to='/add'>
-                  <Button size='small' variant='contained'>
+                  <Button className={classes.button} size='small' variant='contained'>
                     Přidat zařízení
                   </Button>
                 </Link>
@@ -50,7 +54,7 @@ const TopBar: FC = () => {
             </>
           ) : (
             <Link className={classes.linkButton} to='/login'>
-              <Button size='small' variant='contained'>
+              <Button className={classes.button} size='small' variant='contained'>
                 Přihlásit
               </Button>
             </Link>

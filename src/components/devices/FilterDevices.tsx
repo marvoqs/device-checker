@@ -1,9 +1,15 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-// Material-UI
-import { Checkbox, FormControl, FormControlLabel, Input, InputLabel, MenuItem, Select } from '@material-ui/core';
+// Actions
 import { updateFilter } from '../../actions/filter';
+
+// Data
+import { systems, vendors } from '../../data';
+
+// Material-UI
+import { Box, Checkbox, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
 
 const FilterDevices: FC = () => {
   const dispatch = useDispatch();
@@ -23,18 +29,16 @@ const FilterDevices: FC = () => {
   };
 
   return (
-    <>
+    <Box display='flex'>
       <FormControl>
         <InputLabel id='os' shrink>
           Systém
         </InputLabel>
         <Select displayEmpty id='os' labelId='os' name='os' onChange={handleChange} value={formData.os}>
-          <MenuItem value=''>
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value='ANDROID'>ANDROID</MenuItem>
-          <MenuItem value='IOS'>IOS</MenuItem>
-          <MenuItem value='WINDOWS'>WINDOWS</MenuItem>
+          <MenuItem value=''>Nezáleží</MenuItem>
+          {systems.map((system) => (
+            <MenuItem value={system}>{system}</MenuItem>
+          ))}
         </Select>
       </FormControl>
       <FormControl>
@@ -42,18 +46,10 @@ const FilterDevices: FC = () => {
           Výrobce
         </InputLabel>
         <Select displayEmpty id='vendor' labelId='vendor' name='vendor' onChange={handleChange} value={formData.vendor}>
-          <MenuItem value=''>
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value='ACER'>ACER</MenuItem>
-          <MenuItem value='APPLE'>APPLE</MenuItem>
-          <MenuItem value='ASUS'>ASUS</MenuItem>
-          <MenuItem value='HUAWEI'>HUAWEI</MenuItem>
-          <MenuItem value='LG'>LG</MenuItem>
-          <MenuItem value='MOTOROLA'>MOTOROLA</MenuItem>
-          <MenuItem value='SAMSUNG'>SAMSUNG</MenuItem>
-          <MenuItem value='VODAFONE'>VODAFONE</MenuItem>
-          <MenuItem value='XIAOMI'>XIAOMI</MenuItem>
+          <MenuItem value=''>Nezáleží</MenuItem>
+          {vendors.map((vendor) => (
+            <MenuItem value={vendor}>{vendor}</MenuItem>
+          ))}
         </Select>
       </FormControl>
       <FormControlLabel
@@ -67,11 +63,15 @@ const FilterDevices: FC = () => {
         }
         label='Jen dostupné'
       />
-      <FormControl>
-        <InputLabel id='model'>Hledat model</InputLabel>
-        <Input id='model' name='model' onChange={handleChange} type='text' value={formData.model} />
-      </FormControl>
-    </>
+      <Grid container spacing={1} alignItems='flex-end'>
+        <Grid item>
+          <SearchIcon />
+        </Grid>
+        <Grid item>
+          <TextField id='model' label='Hledat model' name='model' onChange={handleChange} value={formData.model} />
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 

@@ -5,6 +5,9 @@ import { useDispatch } from 'react-redux';
 // Actions
 import { addDevice } from '../../actions/device';
 
+// Data
+import { systems, vendors } from '../../data';
+
 // Material-UI
 import { Button, Container, FormControl, Input, InputLabel, MenuItem, Paper, Select, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -54,7 +57,11 @@ const AddDevice: FC = () => {
           </FormControl>
           <FormControl fullWidth>
             <InputLabel id='vendor'>Výrobce</InputLabel>
-            <Input className={classes.formItem} fullWidth id='vendor' name='vendor' onChange={handleChange} required type='text' value={formData.vendor} />
+            <Select className={classes.formItem} fullWidth id='vendor' name='vendor' onChange={handleChange} required value={formData.vendor}>
+              {vendors.map((vendor) => (
+                <MenuItem value={vendor}>{vendor}</MenuItem>
+              ))}
+            </Select>
           </FormControl>
           <FormControl fullWidth>
             <InputLabel id='model'>Model</InputLabel>
@@ -63,9 +70,9 @@ const AddDevice: FC = () => {
           <FormControl fullWidth>
             <InputLabel id='os'>Operační systém</InputLabel>
             <Select className={classes.formItem} fullWidth id='os' name='os' onChange={handleChange} required value={formData.os}>
-              <MenuItem value='ANDROID'>ANDROID</MenuItem>
-              <MenuItem value='IOS'>IOS</MenuItem>
-              <MenuItem value='WINDOWS'>WINDOWS</MenuItem>
+              {systems.map((system) => (
+                <MenuItem value={system}>{system}</MenuItem>
+              ))}
             </Select>
           </FormControl>
           <FormControl fullWidth>
